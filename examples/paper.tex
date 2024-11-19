@@ -1,13 +1,158 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{fullpage}
+\usepackage{amsthm,amsmath,amssymb}
+\usepackage{tikz}
+\usepackage[hidelinks,draft=false,colorlinks=true]{hyperref}
+\usepackage[capitalize]{cleveref} % after hyperref!
 
-\title{Title}
-\author{Name}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% For bibliography
+\usepackage[sorting=none, backend=biber, url=false, isbn=false, hyperref=true, eprint=true, maxbibnames=6]{biblatex}
+\addbibresource{/home/molnar/Dropbox/ZoteroLibrary.bib}
+\AtEveryBibitem{%
+	\clearfield{eprintclass}%
+}
+
+% Setting title to point to doi link
+\ExecuteBibliographyOptions{doi=false}
+\newbibmacro{string+doi}[1]{%
+	\iffieldundef{doi}{#1}{\href{http://dx.doi.org/\thefield{doi}}{#1}}}
+\DeclareFieldFormat{title}{\usebibmacro{string+doi}{\mkbibemph{#1}}}
+\DeclareFieldFormat[article]{title}{\usebibmacro{string+doi}{\mkbibquote{#1}}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%% hyperref setup
+\hypersetup{
+	pdftitle={Quantum information lecture notes},
+	pdfauthor={Andras Molnar},
+	bookmarks=true,
+	bookmarksnumbered=true,
+	bookmarksopen=true,
+	bookmarksopenlevel=1,
+	colorlinks,
+	%linkcolor=blue!50!black,
+	%urlcolor=cyan!50!black!90,
+	pdfstartview=Fit,
+	pdfpagemode=UseOutlines,    
+	pdfpagelayout=TwoPageRight
+}
+
+\newtheorem{lemma}{Lemma}
+\newtheorem{fact}{Fact}
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{corollary}{Corollary}
+\newtheorem{remark}{Remark}
+\newtheorem{definition}{Definition}
+\newtheorem{exercise}{Exercise}
+
+
+\newcommand{\tr}{\operatorname{Tr}}
+\newcommand{\id}{\mathrm{Id}}
+\newcommand{\todo}[1]{{\color{red} #1}}
+\newcommand{\myfcn}{nice }
+\newcommand{\myfcntwo}{admissible }
+\newcommand{\End}{\mathrm{End}}
+\newcommand{\ket}[1]{\vert #1 \rangle}
+\newcommand{\bra}[1]{\langle #1 \vert}
+\newcommand{\scalprod}[2]{\langle #1 \vert #2 \rangle}
+\newcommand{\Span}{\mathrm{Span}}
+\newcommand{\bounded}[1]{\mathcal{B}(#1)}
+
+\title{Quantum Information}
+\author{Andras Molnar}
 
 \begin{document}
 
 \maketitle
 
-\section{Introduction}
+\begin{remark}
+  In this note all Hilbert spaces are complex and finite dimensional unless otherwise stated.
+\end{remark}
 
+\section{Schmidt decomposition}
+
+\begin{definition}[Schmidt decomposition]
+  Let $\mathcal{H},\mathcal{K}$ be Hilbert spaces, $\ket{\Psi}\in\mathcal{H}\otimes \mathcal{K}$. A Schmidt decomposition of $\ket{\Psi}$ is a finite set $\{(\lambda_i, \ket{l_i}, \ket{r_i})\}_{i=1}^n\subseteq \mathbb{C}\times \mathcal{H}\times \mathcal{K}$ such that
+  \begin{equation*}
+    \ket{\Psi} = \sum_{i=1}^n \lambda_i \cdot \ket{l_i} \otimes \ket{r_i},
+  \end{equation*}
+  and such that
+  \begin{itemize}
+  \item  $\lambda_i> 0\ \forall i = 1,\dots, n$,
+  \item $\scalprod{l_i}{l_j} = \delta_{ij}$ for all $i,j=1,\dots, n$, and
+  \item $\scalprod{r_i}{r_j} = \delta_{ij}$ for all $i,j=1,\dots, n$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+  Let $\mathcal{H},\mathcal{K}$ be Hilbert spaces, and $\ket{\Psi}\in\mathcal{H}\otimes \mathcal{K}$, $\ket{\Psi}\neq 0$. Then $\ket{\Psi}$ has a Schmidt decomposition.
+\end{theorem}
+
+\begin{proof}
+  Let $\rho := \tr_{\mathcal{K}} \ket{\Psi}\bra{\Psi}$. This operator is positive semidefinite, and thus we can consider an eigen decomposition
+  \begin{equation}\label{eq:schmidt_existence_eigen}
+    \rho = \sum_i \lambda_i^2 \cdot \ket{l_i}\bra{l_i},
+  \end{equation}
+  with $\lambda_i\in\mathbb{R}$, $\lambda_i\geq 0$ for all $i=1\dots \dim\mathcal{H}$. The vectors $\{\ket{l_i}\}_{i=1}^{\dim \mathcal{H}}$ form a basis of $\mathcal{H}$, we can thus write 
+  \begin{equation*}
+    \ket{\Psi}  = \sum_i \ket{l_i} \otimes \ket{\hat{r}_i},
+  \end{equation*}
+  for some $\{\ket{\hat{r}_i}\}_{i=1}^{\dim \mathcal{H}}\subseteq \mathcal{K}$. Expressing $\rho$ with the help of this form of $\ket{\Psi}$, we obtain 
+  \begin{equation*}
+    \rho = \tr_{\mathcal{K}} \ket{\Psi}\bra{\Psi} = \sum_{i,j=1}^{\dim \mathcal{H}} \ket{l_i}\bra{l_j} \cdot \tr \{ \ket{\hat{r}_i}\bra{\hat{r}_j}\}= \sum_{i,j=1}^{\dim \mathcal{H}} \ket{l_i}\bra{l_j} \cdot \scalprod{\hat{r}_j}{\hat{r}_i}.
+  \end{equation*}
+  Comparing this to \cref{eq:schmidt_existence_eigen}, we obtain $\scalprod{\hat{r}_j}{\hat{r}_i} = \delta_{ij} \lambda_i^2$. For $\lambda_i\neq 0$ we can thus define  $\ket{r_i} = \lambda_i^{-1} \ket{\hat{r}_i}$. These states are, by definition, orthonormal, and 
+  \begin{equation*}
+    \ket{\Psi} = \sum_{i: \lambda_i\neq 0} \lambda_i \cdot \ket{l_i} \otimes \ket{r_i}
+  \end{equation*}
+  is a Schmidt decomposition of $\ket{\Psi}$.
+\end{proof}
+
+\section{LOCC}
+
+\begin{theorem}[Ky-Fan]
+  Let $\mathcal{H}$ be a Hilbert space, $k\in\mathbb{N}$, and 
+  \begin{equation*}
+    \mathcal{P}_k(\mathcal{H}):= \left\{ P\in\bounded{\mathcal{H}} \middle|  P = P^\dagger = P^2,\ \tr(P)=k\right\}.
+  \end{equation*}
+  Let $\rho\in \bounded{\mathcal{H}}$ Hermitian, and 
+  \begin{equation*}
+    \rho = \sum_{i=1}^{\dim\mathcal{H}} \lambda_i \ket{\Phi_i}\bra{\Phi_i}
+  \end{equation*}
+  be its eigen decomposition, with $\lambda_1 \geq \lambda_2 \geq \dots \geq \lambda_{\dim \mathcal{H}}$. Then 
+  \begin{equation*}
+    \sup_{P\in\mathcal{P}_k} \tr\{\rho P\} = \sum_{i=1}^k \lambda_i.
+  \end{equation*}
+\end{theorem}
+
+In other words, given a Hermitian operator $\rho$, the maximum of $\tr\{\rho P\}$, where $P$ is a rank-$k$ Hermitian projector, is the sum of the $k$ largest eigenvalues of $\rho$.
+
+\begin{proof}
+    Let $Q  = \sum_i \ket{\Phi_i}\bra{\Phi_i}$. Then $Q\in\mathcal{P}_k$ and thus 
+    \begin{equation}\label{eq:ky-fan-lower}
+      \sup_{P\in\mathcal{P}_k}\tr\{\rho P\}  \geq \tr\{Q\rho\} = \sum_{i=1}^k \bra{\Phi_i}\rho \ket{\Phi_i} = \sum_{i=1}^k \lambda_i.
+    \end{equation}
+  To obtain the opposite bound, use the spectral decomposition of $\rho$ to write 
+  \begin{equation*}
+    \tr\{\rho P\} = \sum_{i=1}^{\dim\mathcal{H}} \lambda_i \tr\left\{ P \ket{\Phi_i}\bra{\Phi_i} \right\}= \sum_{i=1}^{\dim \mathcal{H}} \lambda_i \cdot \bra{\Phi_i} P \ket{\Phi_i} =  \sum_{i=1}^{\dim \mathcal{H}} \lambda_i \cdot \omega_i,
+  \end{equation*}
+  where $\omega_i = \bra{\Phi_i} P \ket{\Phi_i}$ satisfies $0\leq \omega_i\leq 1$ and $\sum_{i=1}^k \omega_i = k$. We thus obtain that 
+  \begin{equation*}
+    \sup_{P\in\mathcal{P}_k}\tr\{\rho P\} \leq \sup_{\substack{\omega\in [0,1]^{\dim \mathcal{H}}\\ \sum_i \omega_i =k}}  \sum_{i=1}^{\dim \mathcal{H}} \lambda_i \cdot \omega_i.
+  \end{equation*}
+  The maximum of the r.h.s.\ is reached at $\omega_1 = \dots = \omega_k = 1$, and $\omega_{k+1} = \dots = \omega_{\dim\mathcal{H}} = 0$, and its value is $\sum_{i=1}^k \lambda_i$.  Therefore
+  \begin{equation*}
+    \sup_{P\in\mathcal{P}_k}\tr\{\rho P\} \leq \sup_{\substack{\omega\in [0,1]^{\dim \mathcal{H}}\\ \sum_i \omega_i =k}}  \sum_{i=1}^{\dim \mathcal{H}} \lambda_i \cdot \omega_i = \sum_{i=1}^k \lambda_i.
+  \end{equation*}
+ This, together with \cref{eq:ky-fan-lower} is the desired statement.
+\end{proof}
+
+\begin{definition}[Majorization]
+  Let $p,q\in\mathbb{R}^n$ be probability distributions. Let $p^\downarrow$ ($q^\downarrow$) be the vector obtained by listing the entries of $p$ ($q$) in descending order. We say that $p$ is majorized by $q$, and write $p\preccurlyeq q$, if for all $k=1,\dots, n$,
+  \begin{equation*}
+    \sum_{i=1}^k p^\downarrow_i \leq \sum_{i=1}^k q^\downarrow_i. 
+  \end{equation*} 
+\end{definition}
 \end{document}
