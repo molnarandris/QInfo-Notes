@@ -171,7 +171,7 @@ In other words, given a Hermitian operator $\rho$, the maximum of $\tr\{\rho P\}
 
 {\color{red} TODO: Here it is better to define Schmidt coefficient with zero in it.}
 
-\begin{proposition}
+\begin{proposition}\label{prop:LOCC=>majorization}
   Let $\ket{\Psi},\ket{\Phi}\in \mathcal{H}\otimes \mathcal{K}$. Let the squared Schmidt coefficients of $\ket{\Psi}$ be $p$, and the squared Schmidt coefficients of $\ket{\Phi}$ be $q$.  If $\ket{\Psi} \xrightarrow{LOCC} \ket{\Psi}$, then $q\preccurlyeq p$.
 \end{proposition}
 
@@ -233,7 +233,7 @@ This construction can be easily generalized for the case when the squared Schmid
 \end{proof}
 
 {\color{red} Again, number of non-zero Schmidt coeffs might be different!}
-\begin{proposition}
+\begin{proposition}\label{prop:majorization=>LOCC}
   Let $\ket{\Psi},\ket{\Phi}\in \mathcal{H}\otimes \mathcal{K}$. Let the squared Schmidt coefficients of $\ket{\Psi}$ be $p$, and the squared Schmidt coefficients of $\ket{\Phi}$ be $q$. If $p\preccurlyeq q$, then $\ket{\Psi}\xrightarrow{LOCC}\ket{\Phi}$. 
 \end{proposition}
 
@@ -262,7 +262,7 @@ This construction can be easily generalized for the case when the squared Schmid
   i.e., we have shown that $\ket{\Psi}\xrightarrow{LOCC}\ket{\Phi}$.
 \end{proof}
 
-We have thus seen that
+We have thus seen in \cref{prop:LOCC=>majorization} and \cref{prop:majorization=>LOCC} that
 \begin{theorem}
   Let $\ket{\Psi},\ket{\Phi}\in \mathcal{H}\otimes \mathcal{K}$. Let the squared Schmidt coefficients of $\ket{\Psi}$ be $p$, and the squared Schmidt coefficients of $\ket{\Phi}$ be $q$. Then $\ket{\Psi}\xrightarrow{LOCC}\ket{\Phi}$ iff  $p\preccurlyeq q$.   
 \end{theorem}
