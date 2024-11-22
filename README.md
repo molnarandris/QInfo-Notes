@@ -5,4 +5,4 @@ title: Quantum Information and Computation lecture notes
 
 # Quantum Information and computation
 
-These are my lecture notes for the Quantum Information, Computation and Algorithms lecture.
+[These](https://molnarandris.github.io/QInfo-notes/paper.pdf) are my lecture notes for the Quantum Information, Computation and Algorithms lecture.
