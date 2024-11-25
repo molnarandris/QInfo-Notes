@@ -115,16 +115,25 @@
 
 \section{LOCC}
 
-We want to understand which states are more entangled than others. Our strategy: identify a sufficiently large class of operations (this will be LOCC) that we declare not to increase entanglement, then we say that $\ket{\Psi}$ is more entangled than $\ket{\Phi}$ iff we can transform $\ket{\Psi}$ to $\ket{\Phi}$ via those operations.  
+The laws of physics are inherently local (gravity might be an interesting exception): that is, only physical systems that are close to each other tend to interact. In our description, this means that if the two components of a bipartite quantum system $AB$ are ``far from each other'', as for example, a pair of atoms located in two different labs, then there are operations that are ``easy'' to do and operations that are ``hard'' to do. While the exact boundary between easy and hard operations depend on the actual physical system, we can assume that \emph{local} operations are easy to do: unitaries that are of the form $U_A\otimes \id_B$ or $\id_A\otimes U_B$, and measurements of the form $\{M_i^A\otimes \id_B\}_{i=1}^n$ and $\{\id\otimes M_i^B\}_{i=1}^n$. Applying a sequence of ``easy'' operations is considered to be ``easy'' again. 
 
-Which operations shall we choose? Quantum operations of (pure) states, thus they will consist of unitaries and measurements. Minimal requirement: do not transform separable states to entangled states. Unitaries are easy. Only product unitaries are allowed, as
-\begin{proposition}
-  Let $U\in \bounded{\mathcal{H}\otimes\mathcal{K}}$. Then $U (\ket{\psi} \otimes \ket{\phi})$ is a product state for all $\ket{\psi}\in\mathcal{H}$, $\ket{\phi}\in\mathcal{K}$, if and only if $U$ is a product, i.e., there are $V\in\bounded{\mathcal{H}}$ and $ W\in \bounded{\mathcal{K}}$ unitaries such that $U = V\otimes W$ .
-\end{proposition}
-\begin{proof} Exercise.
-  %If $U = V\otimes W$, then $U (\ket{\psi} \otimes \ket{\phi}) = V\ket{\psi} \otimes W\ket{\phi}$, it is a product state. If $U (\ket{\psi} \otimes \ket{\phi}) = \ket{\psi'} \otimes \ket{\phi'}$, for all $\ket{\psi}$ and $\ket{\phi}$, then due to linearity of the l.h.s.,  
-\end{proof}
+LOCC operations (local operations assisted by classical communication) consist of these local operations, but where we assume in addition that the parties can communicate with each other (by classical means): they can share their measurement outcomes, and thus the subsequent unitaries and measurements of all parties might depend on the measurement outcomes. We have already seen such a protocol: teleportation. 
 
+In this section, we will try to understand when a state $\ket{\Phi}$ can be transformed into another state $\ket{\Psi}$ via LOCC operations; if it is possible, we write $\ket{\Phi}\xrightarrow{LOCC}\ket{\Psi}$. In this case $\ket{\Phi}$ is a better resource for carrying out any task where the parties are restricted by locality, but where they are allowed to communicate: for example, when they want to carry out an experiment on a collection of entangled particles where the particles are located in different labs. 
+
+
+%We want to understand which states are more entangled than others. Our strategy: identify a sufficiently large class of operations that we declare not to increase entanglement, then we say that $\ket{\Psi}$ is more entangled than $\ket{\Phi}$ iff we can transform $\ket{\Psi}$ to $\ket{\Phi}$ via those operations. To botain this class of operations, consider the following scenario:
+
+%This large class of operations is every thing that the parties can do using only local operations (that is, measurements and unitaries) but where they are allowed to share classical information with each other.
+
+%Which operations shall we choose? Quantum operations of (pure) states, thus they will consist of unitaries and measurements. Minimal requirement: do not transform separable states to entangled states. Unitaries are easy. Only product unitaries are allowed, as
+%\begin{proposition}
+%  Let $U\in \bounded{\mathcal{H}\otimes\mathcal{K}}$. Then $U (\ket{\psi} \otimes \ket{\phi})$ is a product state for all $\ket{\psi}\in\mathcal{H}$, $\ket{\phi}\in\mathcal{K}$, if and only if $U$ is a product, i.e., there are $V\in\bounded{\mathcal{H}}$ and $ W\in \bounded{\mathcal{K}}$ unitaries such that $U = V\otimes W$ .
+%\end{proposition}
+%\begin{proof} Exercise.
+%  %If $U = V\otimes W$, then $U (\ket{\psi} \otimes \ket{\phi}) = V\ket{\psi} \otimes W\ket{\phi}$, it is a product state. If $U (\ket{\psi} \otimes \ket{\phi}) = \ket{\psi'} \otimes \ket{\phi'}$, for all $\ket{\psi}$ and $\ket{\phi}$, then due to linearity of the l.h.s.,  
+%\end{proof}
+%For measurements, a similar statement holds: if we want \emph{all} measurement outcomes to be separable for a pure separable  input, then the measurement operators are products. In LOCC we include only  
 \begin{theorem}[Ky-Fan]\label{thm:Ky-Fan}
   Let $\mathcal{H}$ be a Hilbert space, $k\in\mathbb{N}$, and 
   \begin{equation*}
