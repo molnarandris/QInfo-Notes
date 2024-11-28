@@ -74,6 +74,26 @@
   In this note all Hilbert spaces are complex and finite dimensional unless otherwise stated.
 \end{remark}
 
+\section{Teleportation and dense coding}
+
+Let us assume that Alice and Bob share a maximally entangled state. Assume Alice has an additional other, unknown, state $\ket{\Psi}$. Quantum state teleportation is a protocol where Alice transfers the state $\ket{\Psi}$ to Bob using only two bits of classical communication. Even though it is required that at some point in time there is a qubit communication between Alice and Bob, one half of the maximally entangled state, this communication can happen Alice even gets the state $\ket{\Psi}$\footnote{and actually it might be Bob who sends a qubit to Alice}, thus it carries no information about $\ket{\Psi}$. 
+
+To describe the protocol, let us define the Bell basis. Let $\Omega\in \mathbb{C}^2 \otimes \mathbb{C}^2$ be the maximally entangled state, $\Omega = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11}$. Let us define $\ket{\Omega_{\alpha \beta}}$ as $\ket{\Omega_{\alpha\beta}} = (\id \otimes X^\alpha Z^\beta)\ket{\Omega}$, $\alpha,\beta\in \{0,1\}$. Explicitly,
+\begin{align*}
+  \ket{\Omega_{00}} &= (\id\otimes \id) \ket{\Omega} = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11},\\
+  \ket{\Omega_{01}} &= (\id\otimes Z)\ket{\Omega} = \frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{11},\\
+  \ket{\Omega_{10}} &= (\id\otimes X)\ket{\Omega} = \frac{1}{\sqrt{2}} \ket{01} + \frac{1}{\sqrt{2}} \ket{10},\\
+  \ket{\Omega_{11}} &= (\id\otimes XZ)\ket{\Omega} = \frac{1}{\sqrt{2}} \ket{01} - \frac{1}{\sqrt{2}} \ket{10}.  
+\end{align*} 
+
+At the beginning of the protocol, Alice and Bob have the state $\ket{\Psi}\otimes\ket{\Omega}\in \mathcal{H}_{A'} \otimes \mathcal{H}_{A}\otimes \mathcal{H}_B$; in Alice's lab the qubits $A'$ and $A$, in Bob's lab the qubit $B$. The protocol consists of the following steps:
+\begin{itemize}
+  \item Alice measures the qubits $A$ and $A'$ in the Bell basis, and obtains outcome $(\alpha,\beta)\in\{0,1\}^2$.
+  \item  Alice sends the classical bits $\alpha$ and $\beta$ to Bob
+  \item  Bob applies on the particle $B$ the operator $x^\alpha Z^\beta$. 
+\end{itemize}
+We will show that at the end of the protocol, Bob obtains the state $\ket{\Psi}$.
+
 \section{Schmidt decomposition}
 
 \begin{definition}[Schmidt decomposition]
@@ -88,6 +108,18 @@
   \item $\scalprod{r_i}{r_j} = \delta_{ij}$ for all $i,j=1,\dots, n$.
   \end{itemize}
 \end{definition}
+
+The vectors $\{\ket{l_i}\}_{i=1}^n$ and $\{(\ket{r_i}\}_{i=1}^n$ are linearly independent, and thus a Schmidt decomposition is a minimal rank decomposition. Not every minimal rank decomposition is a Schmidt decomposition, as there the tensor components are not required to be orthonormal.
+
+\begin{example}
+  Consider the following states. 
+  \begin{itemize}
+    \item $\ket{\Omega} = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11}$. This is a Schmidt decomposition of $\ket{\Omega}$.
+    \item The same state admits another Schmidt decomposition: $\ket{\Omega} = \frac{1}{\sqrt{2}} \ket{++} + \frac{1}{\sqrt{2}} \ket{--}$. So the Schmidt decomposition is not unique. Note: the lack of uniqueness is due to the degeneracy of its Schmidt values. 
+    \item $\ket{\Psi} = \frac{1}{\sqrt{2}} \ket{+0} + \frac{1}{\sqrt{2}} \ket{11}$ is not a Schmidt decomposition, as $\scalprod{+}{1}\neq 0$.
+    \item $\ket{\Phi} = \frac{1}{\sqrt{2}} \ket{+0} + \frac{1}{\sqrt{2}} \ket{-1}$ is a Schmidt decomposition. The basis on the left and on the right is not necessarily the same (they, in general, are even bases of different Hilbert spaces).
+  \end{itemize}
+\end{example}
 
 \begin{theorem}
   Let $\mathcal{H},\mathcal{K}$ be Hilbert spaces, and $\ket{\Psi}\in\mathcal{H}\otimes \mathcal{K}$, $\ket{\Psi}\neq 0$. Then $\ket{\Psi}$ has a Schmidt decomposition.
@@ -112,6 +144,8 @@
   \end{equation*}
   is a Schmidt decomposition of $\ket{\Psi}$.
 \end{proof}
+
+Consider $\ket{\Psi}\in\mathcal{H}\otimes \mathcal{K}$, and set $\rho_{\mathcal{H}} := \tr_{\mathcal{K}} \ket{\Psi}\bra{\Psi}$ and $\rho_{\mathcal{K}} := \tr_{\mathcal{H}} \ket{\Psi}\bra{\Psi}$. These two matrices -- the reduced densities of the state $\ket{\Psi}$ -- have the same spectrum, except for the eigenvalue $0$: they are both the squared Schmidt values of $\ket{\Psi}$, plus maybe additional zeros.  
 
 \section{LOCC}
 
