@@ -74,11 +74,51 @@
   In this note all Hilbert spaces are complex and finite dimensional unless otherwise stated.
 \end{remark}
 
+
+
+\section{Entanglement}
+
+\section{The maximally entangled state}
+
+Let $\mathcal{H} = \mathbb{C}^d$ and consider the state $\ket{\Omega} = \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \ket{ii}$. This state is called the maximally entangled state and it has the following properties.
+
+\begin{proposition}
+  Let $A\in\mathcal{M}_d$ be any square matrix, then 
+  \begin{equation*}
+     (A \otimes \id) \ket{\Omega} = (\id\otimes A^T) \ket{\Omega}.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+   Exercise: explicit calculation.
+\end{proof}
+More generally, let $d$ and $D$ be natural numbers, $\ket{\Omega_d}$ and $\ket{\Omega_D}$ be the $d$- and the $D$ dimensional maximally entagled states. Then
+\begin{proposition}
+  Let $A\in\mathcal{M}_{d\times D}$ be a $d\times D$ matrix, then 
+  \begin{equation*}
+    (A \otimes \id) \ket{\Omega_D} = (\id\otimes A^T) \ket{\Omega_d}.
+  \end{equation*}
+\end{proposition}
+\begin{proof}
+  Exercise: explicit calculation.
+\end{proof}
+A special case of this equation is if $d=1$. Then $\ket{\Omega_d} \in \mathbb{C}^d\otimes \mathbb{C}^d \simeq \mathbb{C}$ is just $1$, and the $d\times D$ matrix is just a linear functional. Writing out this case explicitly, we obtain 
+\begin{proposition}
+  Let $\ket{\Psi}\in\mathbb{C}^{d}$ and $\ket{\Omega}\in \mathbb{C}^d \otimes \mathbb{C}^d$ be the maximally entangled state. Then 
+  \begin{equation*}
+    (\bra{\Psi} \otimes \id) \ket{\Omega} = \ket{\bar{\Psi}},
+  \end{equation*}
+  the complex conjugate of $\ket{\Psi}$.
+\end{proposition}
+\begin{proof}
+  Exercise: explicit calculation.
+\end{proof}
+
+
 \section{Teleportation and dense coding}
 
-Let us assume that Alice and Bob share a maximally entangled state. Assume Alice has an additional other, unknown, state $\ket{\Psi}$. Quantum state teleportation is a protocol where Alice transfers the state $\ket{\Psi}$ to Bob using only two bits of classical communication. Even though it is required that at some point in time there is a qubit communication between Alice and Bob, one half of the maximally entangled state, this communication can happen Alice even gets the state $\ket{\Psi}$\footnote{and actually it might be Bob who sends a qubit to Alice}, thus it carries no information about $\ket{\Psi}$. 
+Let us assume that Alice and Bob share a maximally entangled state $\ket{\Omega}\in \mathbb{C}^2 \otimes \mathbb{C}^2$. Assume Alice has an additional, unknown, state $\ket{\Psi}\in\mathbb{C}^2$. Quantum state teleportation is a protocol where Alice transfers the state $\ket{\Psi}$ to Bob using only two bits of classical communication. Even though it is required that at some point in time there is a qubit communication between Alice and Bob, one half of the maximally entangled state, this communication can happen Alice even gets the state $\ket{\Psi}$\footnote{and actually it might be Bob who sends a qubit to Alice}, thus it carries no information about $\ket{\Psi}$. 
 
-To describe the protocol, let us define the Bell basis. Let $\Omega\in \mathbb{C}^2 \otimes \mathbb{C}^2$ be the maximally entangled state, $\Omega = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11}$. Let us define $\ket{\Omega_{\alpha \beta}}$ as $\ket{\Omega_{\alpha\beta}} = (\id \otimes X^\alpha Z^\beta)\ket{\Omega}$, $\alpha,\beta\in \{0,1\}$. Explicitly,
+To describe the protocol, let us define the Bell basis. Let $\ket{\Omega}\in \mathbb{C}^2 \otimes \mathbb{C}^2$ be the maximally entangled state, $\ket{\Omega} = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11}$. Let us define $\ket{\Omega_{\alpha \beta}}$ as $\ket{\Omega_{\alpha\beta}} = (\id \otimes X^\alpha Z^\beta)\ket{\Omega}$, $\alpha,\beta\in \{0,1\}$. Explicitly,
 \begin{align*}
   \ket{\Omega_{00}} &= (\id\otimes \id) \ket{\Omega} = \frac{1}{\sqrt{2}} \ket{00} + \frac{1}{\sqrt{2}} \ket{11},\\
   \ket{\Omega_{01}} &= (\id\otimes Z)\ket{\Omega} = \frac{1}{\sqrt{2}} \ket{00} - \frac{1}{\sqrt{2}} \ket{11},\\
@@ -87,12 +127,43 @@ To describe the protocol, let us define the Bell basis. Let $\Omega\in \mathbb{C
 \end{align*} 
 
 At the beginning of the protocol, Alice and Bob have the state $\ket{\Psi}\otimes\ket{\Omega}\in \mathcal{H}_{A'} \otimes \mathcal{H}_{A}\otimes \mathcal{H}_B$; in Alice's lab the qubits $A'$ and $A$, in Bob's lab the qubit $B$. The protocol consists of the following steps:
-\begin{itemize}
+\begin{enumerate}
   \item Alice measures the qubits $A$ and $A'$ in the Bell basis, and obtains outcome $(\alpha,\beta)\in\{0,1\}^2$.
   \item  Alice sends the classical bits $\alpha$ and $\beta$ to Bob
   \item  Bob applies on the particle $B$ the operator $x^\alpha Z^\beta$. 
-\end{itemize}
-We will show that at the end of the protocol, Bob obtains the state $\ket{\Psi}$.
+\end{enumerate}
+We will show that at the end of the protocol, Bob obtains the state $\ket{\Psi}$. For that, note the post-measurement state after Alice's measurement, up to normalization, is 
+\begin{equation*}
+   \ket{\Phi_{\alpha\beta}} = (\ket{\Omega_{\alpha\beta}}\bra{\Omega_{\alpha\beta}} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}),
+\end{equation*}
+where the order of the tensor components is $A'AB$. As the measurement is rank-1, the outcome is of the form $\ket{\Phi_{\alpha\beta}} = \ket{\Omega_{\alpha\beta}}\otimes \ket{\Psi_{\alpha\beta}}$, where
+\begin{equation*}
+     \ket{\Psi_{\alpha\beta}} = (\bra{\Omega_{\alpha\beta}} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}).
+\end{equation*}
+ Let us write out now the definition of $\ket{\Omega_{\alpha \beta}}$ in this formula:
+\begin{equation*}
+  \ket{\Psi_{\alpha\beta}} = (\bra{\Omega_{\alpha\beta}} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}) = (\bra{\Omega} \otimes\id) (\id \otimes Z^\beta X^\alpha\otimes\id) (\ket{\Psi} \otimes \ket{\Omega}).
+\end{equation*}
+Using now {\color{red} ... Property} of the maximally entangled state, we obtain that 
+\begin{equation*}
+  \ket{\Psi_{\alpha\beta}} =  (\bra{\Omega} \otimes\id) (\id \otimes Z^\beta X^\alpha \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}) =  (\bra{\Omega} \otimes\id) (\id \otimes \id \otimes X^\alpha Z^\beta ) (\ket{\Psi} \otimes \ket{\Omega}) = X^\alpha Z^\beta\ket{\Psi_{00}},
+\end{equation*}
+where 
+\begin{equation*}
+  \ket{\Psi_{00}} =  (\bra{\Omega} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}).
+\end{equation*}
+Using again {\color{red} ... Property} of the entangled state, we obtain that
+\begin{equation*}
+  \ket{\Psi_{00}} =  (\bra{\Omega} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}) = (\bra{\bar{\Psi}} \otimes\id) \ket{\Omega} = \ket{\Psi}.
+\end{equation*}
+We thus obtain that the state after Alice's measurement, if she obtains ouctcome $\alpha\beta$, is
+\begin{equation*}
+  \ket{\Phi_{\alpha\beta}} = \ket{\Omega_{\alpha\beta}}\otimes X^\alpha Z^\beta \ket{\Psi}.
+\end{equation*}
+Therefore, if Bob applies $Z^\beta X^\alpha$ on his part of the state, he will obtain the state $\ket{\Psi}$ independent of Alice's side.
+
+{\color{red} Break down the measurement into rotation and two single-qubit measurements}
+
 
 \section{Schmidt decomposition}
 
