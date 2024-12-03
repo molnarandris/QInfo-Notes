@@ -75,14 +75,117 @@
 \end{remark}
 
 
+\section{Introduction}
+
+\subsection{Bra-ket notation}
+
+\begin{itemize}
+  \item Bra and ket
+  \item Scalar product
+  \item Adjoint
+  \item Eigenvalues
+\end{itemize}
+
+\subsection{Positivity}
+
+\begin{definition}[Positivity]
+  A matrix $A\in \bounded{\mathcal{H}}$ is \emph{positive semidefinite} if $\bra{\Psi} A\ket{\Psi} \geq 0$ for all $\ket{\Psi}\in\mathcal{H}$. It is \emph{positive definite} if $\bra{\Psi} A\ket{\Psi} > 0$ for all $\ket{\Psi}\in\mathcal{H}$. 
+\end{definition}
+
+\begin{theorem}
+  Let $\mathcal{H}$ be a Hilbert space, $A\in\bounded{\mathcal{H}}$ be a matrix. The following are equivalent.
+  \begin{itemize}
+    \item $A$ is positive semidefinite (positive definite)
+    \item $A$ is Hermitian and it has only non-negative (positive) eigenvalues
+    \item There is a(n invertible) matrix $X\in \bounded{\mathcal{H}}$ such that $A = X^\dagger X$.
+  \end{itemize}
+\end{theorem}
+
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\subsection{Tensor product}
+
+\section{Quantum mechanics}
+
+\subsection{The rules of quantum mechanics}
+ \begin{itemize}
+   \item States
+   \item Time evolution
+   \item Measurements: destructive, then projective
+ \end{itemize}
+ 
+\subsection{The rules of quantum mechanics: mixed states}
+\begin{itemize}
+  \item Mixed states
+  \item POVMs
+  \item CP maps
+\end{itemize}
+
+
+\begin{definition}[Ensemble]
+  Let $\mathcal{H}$ be a Hilbert space. En \emph{ensemble} is a collection of normalized vectors with probabilities: it is given by $n\in\mathbb{N}$ and $\big((p_i, \ket{\Psi_i})\big)_{i=1}^n \subseteq (\mathbb{R}_{\geq 0} \times \mathcal{H})^n$ such that $\|\Psi_i\| = 1$ for all $i=1,\dots,n$ and $\sum_{i=1}^n p_i = 1$.
+\end{definition}
+\subsubsection{Mixed states}
+
+\begin{definition}[Density matrix]
+  Let $\mathcal{H}$ be a Hilbert space. A \emph{state} or a \emph{density matrix} on $\mathcal{H}$ is a matrix $\rho\in\bounded{\mathcal{H}}$ such that $\tr\rho = 1$, and $\rho\geq 0$, i.e., it is positive semidefinite. The state $\rho$ is called \emph{pure} if it is rank-one. 
+\end{definition}
+
+\begin{proposition}
+  Let $\mathcal{H}$ be a Hilbert space and $\rho\in\bounded{\mathcal{H}}$ be a pure state. Then there is $\ket{\Psi}\in\mathcal{H}$, $\|\Psi\| = 1$, such that $\rho  = \ket{\Psi} \bra{\Psi}$.
+\end{proposition}
+
+\subsubsection{CP maps}
+
+\begin{definition}
+    Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that $T$ is \emph{trace preserving} if $\tr T(\rho) = \tr \rho$, for all $\rho\in\bounded{\mathcal{H}}$.
+\end{definition}
+
+\begin{definition}
+  Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that $T$ is a Kraus map if there are $A_i\in \mathcal{B}(\mathcal{H}\rightarrow \mathcal{K})$ such that 
+  \begin{equation}\label{eq:Kraus_decomp_def}
+    T(\rho) = \sum_{i=1}^n A_i \rho A_i^\dagger.
+  \end{equation}
+  The operators $A_i$ are called the Kraus operators, and \cref{eq:Kraus_decomp_def} the Kraus representation of $T$.
+\end{definition}
+
+\begin{proposition}
+    Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be a Kraus map with Kraus operators $\{A_i\}_{i=1}^n$. Then $T$ is trace preserving iff $\sum_i A_i^\dagger A_i = \id_{\mathcal{H}}$.
+\end{proposition}
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{definition}
+  Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that 
+  \begin{itemize}
+    \item $T$ is \emph{positivity preserving}, or simply \emph{positive}, if $T(\rho)\geq 0$ for all $\rho\in\bounded{\mathcal{H}}$. 
+    \item $T$ is $n$-positive if $T\otimes\id: \bounded{\mathcal{H}}\otimes\bounded{\mathbb{C}^n} \to \bounded{\mathcal{H}} \otimes \bounded{\mathbb{C}^n}$ is positive.
+    \item $T$ is \emph{completely positive (CP)} if it is $n$-positive for all $n\in\mathbb{N}$.
+  \end{itemize}
+\end{definition}
 
 \section{Entanglement}
+
+\begin{definition}[Entanglement of pure states]
+  A pure state $\ket{\Psi}\in \mathcal{H}\otimes\mathcal{K}$ is called entangled if it is not a product.
+\end{definition}
+
+\begin{definition}[Entanglement]
+  A state $\rho \in \bounded{\mathcal{H}} \otimes \bounded{\mathcal{K}}$ is called \emph{separable} if there are density matrices $\mu_i\in \bounded{\mathcal{H}}$, $\nu_i\in\bounded{\mathcal{H}}$, $i=1\dots n$, and a probability distribution $p\in\mathbb{R}^n$ such that
+  \begin{equation*}
+    \rho = \sum_{i=1}^n p_i \cdot \mu_i \otimes \nu_i.    
+  \end{equation*}
+  The state $\rho$ is called \emph{entangled} if it is not separable.
+\end{definition}
 
 \section{The maximally entangled state}
 
 Let $\mathcal{H} = \mathbb{C}^d$ and consider the state $\ket{\Omega} = \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \ket{ii}$. This state is called the maximally entangled state and it has the following properties.
 
-\begin{proposition}
+\begin{proposition}\label{prop:max_ent_pull_through}
   Let $A\in\mathcal{M}_d$ be any square matrix, then 
   \begin{equation*}
      (A \otimes \id) \ket{\Omega} = (\id\otimes A^T) \ket{\Omega}.
@@ -102,7 +205,7 @@ More generally, let $d$ and $D$ be natural numbers, $\ket{\Omega_d}$ and $\ket{\
   Exercise: explicit calculation.
 \end{proof}
 A special case of this equation is if $d=1$. Then $\ket{\Omega_d} \in \mathbb{C}^d\otimes \mathbb{C}^d \simeq \mathbb{C}$ is just $1$, and the $d\times D$ matrix is just a linear functional. Writing out this case explicitly, we obtain 
-\begin{proposition}
+\begin{proposition}\label{prop:max_ent_pull_through_lin_fcn}
   Let $\ket{\Psi}\in\mathbb{C}^{d}$ and $\ket{\Omega}\in \mathbb{C}^d \otimes \mathbb{C}^d$ be the maximally entangled state. Then 
   \begin{equation*}
     (\bra{\Psi} \otimes \id) \ket{\Omega} = \ket{\bar{\Psi}},
@@ -144,7 +247,7 @@ where the order of the tensor components is $A'AB$. As the measurement is rank-1
 \begin{equation*}
   \ket{\Psi_{\alpha\beta}} = (\bra{\Omega_{\alpha\beta}} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}) = (\bra{\Omega} \otimes\id) (\id \otimes Z^\beta X^\alpha\otimes\id) (\ket{\Psi} \otimes \ket{\Omega}).
 \end{equation*}
-Using now {\color{red} ... Property} of the maximally entangled state, we obtain that 
+Using now \cref{prop:max_ent_pull_through}, i.e., that the maximally entangled state satisfies $(A\otimes \id) \cdot \ket{\Omega} = (\id\otimes A^T) \cdot\ket{\Omega}$, for any square matrix $A$, we obtain that 
 \begin{equation*}
   \ket{\Psi_{\alpha\beta}} =  (\bra{\Omega} \otimes\id) (\id \otimes Z^\beta X^\alpha \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}) =  (\bra{\Omega} \otimes\id) (\id \otimes \id \otimes X^\alpha Z^\beta ) (\ket{\Psi} \otimes \ket{\Omega}) = X^\alpha Z^\beta\ket{\Psi_{00}},
 \end{equation*}
@@ -152,7 +255,7 @@ where
 \begin{equation*}
   \ket{\Psi_{00}} =  (\bra{\Omega} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}).
 \end{equation*}
-Using again {\color{red} ... Property} of the entangled state, we obtain that
+Using now \cref{prop:max_ent_pull_through_lin_fcn} twice, we obtain that
 \begin{equation*}
   \ket{\Psi_{00}} =  (\bra{\Omega} \otimes\id) (\ket{\Psi} \otimes \ket{\Omega}) = (\bra{\bar{\Psi}} \otimes\id) \ket{\Omega} = \ket{\Psi}.
 \end{equation*}
