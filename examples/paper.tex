@@ -107,83 +107,20 @@
 
 \subsection{Tensor product}
 
-\section{Quantum mechanics}
+\subsubsection{The maximally entangled state}
 
-\subsection{The rules of quantum mechanics}
- \begin{itemize}
-   \item States
-   \item Time evolution
-   \item Measurements: destructive, then projective
- \end{itemize}
- 
-\subsection{The rules of quantum mechanics: mixed states}
-\begin{itemize}
-  \item Mixed states
-  \item POVMs
-  \item CP maps
-\end{itemize}
+Let $\mathcal{H} = \mathbb{C}^d$ and consider the state $\ket{\Omega} = \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \ket{ii}\in\mathcal{H}\otimes\mathcal{H}$. This state is called the maximally entangled state and it has the following properties.
 
 
-\begin{definition}[Ensemble]
-  Let $\mathcal{H}$ be a Hilbert space. En \emph{ensemble} is a collection of normalized vectors with probabilities: it is given by $n\in\mathbb{N}$ and $\big((p_i, \ket{\Psi_i})\big)_{i=1}^n \subseteq (\mathbb{R}_{\geq 0} \times \mathcal{H})^n$ such that $\|\Psi_i\| = 1$ for all $i=1,\dots,n$ and $\sum_{i=1}^n p_i = 1$.
-\end{definition}
-\subsubsection{Mixed states}
-
-\begin{definition}[Density matrix]
-  Let $\mathcal{H}$ be a Hilbert space. A \emph{state} or a \emph{density matrix} on $\mathcal{H}$ is a matrix $\rho\in\bounded{\mathcal{H}}$ such that $\tr\rho = 1$, and $\rho\geq 0$, i.e., it is positive semidefinite. The state $\rho$ is called \emph{pure} if it is rank-one. 
-\end{definition}
-
-\begin{proposition}
-  Let $\mathcal{H}$ be a Hilbert space and $\rho\in\bounded{\mathcal{H}}$ be a pure state. Then there is $\ket{\Psi}\in\mathcal{H}$, $\|\Psi\| = 1$, such that $\rho  = \ket{\Psi} \bra{\Psi}$.
-\end{proposition}
-
-\subsubsection{CP maps}
-
-\begin{definition}
-    Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that $T$ is \emph{trace preserving} if $\tr T(\rho) = \tr \rho$, for all $\rho\in\bounded{\mathcal{H}}$.
-\end{definition}
-
-\begin{definition}
-  Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that $T$ is a Kraus map if there are $A_i\in \mathcal{B}(\mathcal{H}\rightarrow \mathcal{K})$ such that 
-  \begin{equation}\label{eq:Kraus_decomp_def}
-    T(\rho) = \sum_{i=1}^n A_i \rho A_i^\dagger.
-  \end{equation}
-  The operators $A_i$ are called the Kraus operators, and \cref{eq:Kraus_decomp_def} the Kraus representation of $T$.
-\end{definition}
-
-\begin{proposition}
-    Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be a Kraus map with Kraus operators $\{A_i\}_{i=1}^n$. Then $T$ is trace preserving iff $\sum_i A_i^\dagger A_i = \id_{\mathcal{H}}$.
-\end{proposition}
-\begin{proof}
-  Exercise.
-\end{proof}
-
-\begin{definition}
-  Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that 
-  \begin{itemize}
-    \item $T$ is \emph{positivity preserving}, or simply \emph{positive}, if $T(\rho)\geq 0$ for all $\rho\in\bounded{\mathcal{H}}$. 
-    \item $T$ is $n$-positive if $T\otimes\id: \bounded{\mathcal{H}}\otimes\bounded{\mathbb{C}^n} \to \bounded{\mathcal{H}} \otimes \bounded{\mathbb{C}^n}$ is positive.
-    \item $T$ is \emph{completely positive (CP)} if it is $n$-positive for all $n\in\mathbb{N}$.
-  \end{itemize}
-\end{definition}
-
-\section{Entanglement}
-
-\begin{definition}[Entanglement of pure states]
-  A pure state $\ket{\Psi}\in \mathcal{H}\otimes\mathcal{K}$ is called entangled if it is not a product.
-\end{definition}
-
-\begin{definition}[Entanglement]
-  A state $\rho \in \bounded{\mathcal{H}} \otimes \bounded{\mathcal{K}}$ is called \emph{separable} if there are density matrices $\mu_i\in \bounded{\mathcal{H}}$, $\nu_i\in\bounded{\mathcal{H}}$, $i=1\dots n$, and a probability distribution $p\in\mathbb{R}^n$ such that
+\begin{proposition}\label{prop:max_ent_partial_tr}
   \begin{equation*}
-    \rho = \sum_{i=1}^n p_i \cdot \mu_i \otimes \nu_i.    
+    (\id \otimes \tr )(\ket{\Omega}\bra{\Omega}) = (\tr \otimes\id)(\ket{\Omega}\bra{\Omega})  = \id.
   \end{equation*}
-  The state $\rho$ is called \emph{entangled} if it is not separable.
-\end{definition}
+\end{proposition}
 
-\section{The maximally entangled state}
-
-Let $\mathcal{H} = \mathbb{C}^d$ and consider the state $\ket{\Omega} = \frac{1}{\sqrt{d}}\sum_{i=0}^{d-1} \ket{ii}$. This state is called the maximally entangled state and it has the following properties.
+\begin{proof}
+  Explicit calculation; exercise.
+\end{proof}
 
 \begin{proposition}\label{prop:max_ent_pull_through}
   Let $A\in\mathcal{M}_d$ be any square matrix, then 
@@ -216,6 +153,146 @@ A special case of this equation is if $d=1$. Then $\ket{\Omega_d} \in \mathbb{C}
   Exercise: explicit calculation.
 \end{proof}
 
+
+\section{Quantum mechanics}
+
+\subsection{The rules of quantum mechanics}
+ \begin{itemize}
+   \item States
+   \item Time evolution
+   \item Measurements: destructive, then projective
+ \end{itemize}
+ 
+\subsection{The rules of quantum mechanics: mixed states}
+\begin{itemize}
+  \item Mixed states
+  \item POVMs
+  \item CP maps
+\end{itemize}
+
+
+\begin{definition}[Ensemble]
+  Let $\mathcal{H}$ be a Hilbert space. En \emph{ensemble} is a collection of normalized vectors with probabilities: it is given by $n\in\mathbb{N}$ and $\big((p_i, \ket{\Psi_i})\big)_{i=1}^n \subseteq (\mathbb{R}_{\geq 0} \times \mathcal{H})^n$ such that $\|\Psi_i\| = 1$ for all $i=1,\dots,n$ and $\sum_{i=1}^n p_i = 1$.
+\end{definition}
+\subsubsection{Mixed states}
+
+\begin{definition}[Density matrix]
+  Let $\mathcal{H}$ be a Hilbert space. A \emph{state} or a \emph{density matrix} on $\mathcal{H}$ is a matrix $\rho\in\bounded{\mathcal{H}}$ such that $\tr\rho = 1$, and $\rho\geq 0$, i.e., it is positive semidefinite. The state $\rho$ is called \emph{pure} if it is rank-one. 
+\end{definition}
+
+\begin{proposition}
+  Let $\mathcal{H}$ be a Hilbert space and $\rho\in\bounded{\mathcal{H}}$ be a pure state. Then there is $\ket{\Psi}\in\mathcal{H}$, $\|\Psi\| = 1$, such that $\rho  = \ket{\Psi} \bra{\Psi}$.
+\end{proposition}
+
+\begin{proof}
+   $\rho$ is rank-one and Hermitian, thus it can be written as $\rho = \ket{\Psi}\bra{\Psi}$. $\tr \rho = \tr\ket{\Psi} \bra{\Psi} = \scalprod{\Psi}{\Psi} = \|\Psi\|^2 = 1$.
+\end{proof}
+
+
+
+
+
+\subsubsection{CP maps}
+
+\begin{definition}
+    Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that $T$ is \emph{trace preserving} if $\tr T(\rho) = \tr \rho$, for all $\rho\in\bounded{\mathcal{H}}$.
+\end{definition}
+
+\begin{definition}
+  Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that $T$ is a Kraus map if there are $A_i\in \mathcal{B}(\mathcal{H}\rightarrow \mathcal{K})$ such that 
+  \begin{equation}\label{eq:Kraus_decomp_def}
+    T(\rho) = \sum_{i=1}^n A_i \rho A_i^\dagger.
+  \end{equation}
+  The operators $A_i$ are called the Kraus operators, and \cref{eq:Kraus_decomp_def} the Kraus representation of $T$.
+\end{definition}
+
+\begin{proposition}
+    Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be a Kraus map with Kraus operators $\{A_i\}_{i=1}^n$. Then $T$ is trace preserving iff $\sum_i A_i^\dagger A_i = \id_{\mathcal{H}}$.
+\end{proposition}
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\begin{definition}
+  Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. We say that 
+  \begin{itemize}
+    \item $T$ is \emph{positivity preserving}, or simply \emph{positive}, if $T(\rho)\geq 0$ for all $\rho\in\bounded{\mathcal{H}}$. 
+    \item $T$ is $n$-positive if $T\otimes\id: \bounded{\mathcal{H}}\otimes\bounded{\mathbb{C}^n} \to \bounded{\mathcal{H}} \otimes \bounded{\mathbb{C}^n}$ is positive.
+    \item $T$ is \emph{completely positive (CP)} if it is $n$-positive for all $n\in\mathbb{N}$.
+  \end{itemize}
+\end{definition}
+
+\begin{theorem}
+   Let $\mathcal{H}$ and $\mathcal{K}$ be two Hilbert spaces, and $\ket{\Omega}\in\mathcal{H}\otimes\mathcal{H}$ be a maximally entangled state. Let $T:\bounded{\mathcal{H}}\to\bounded{\mathcal{K}}$ be linear. The following are equivalent:
+   \begin{enumerate}
+        \item $T$ is completely positive. \label{CP_Kraus_thm_1}
+        \item $T$ is $\dim(H)$-positive. \label{CP_Kraus_thm_2}
+        \item $(\id\otimes T)(\ket{\Omega}\bra{\Omega}) \geq 0$. \label{CP_Kraus_thm_3} 
+        \item $T$ is Kraus. \label{CP_Kraus_thm_4}
+   \end{enumerate}
+\end{theorem}
+\begin{proof}
+  The implication \ref{CP_Kraus_thm_1} $\Rightarrow$ \ref{CP_Kraus_thm_2} $\Rightarrow$ \ref{CP_Kraus_thm_3} is by definition. To check \ref{CP_Kraus_thm_3} $\Rightarrow$ \ref{CP_Kraus_thm_4}, note that 
+  \begin{equation*}
+    T(\rho) = (\tr \otimes T) ((\id \otimes \rho ) \ket{\Omega}\bra{\Omega}) = (\tr \otimes T) ((\rho^T \otimes \id ) \ket{\Omega}\bra{\Omega}) = (\tr\otimes \id) ((\rho^T \otimes \id) X),
+  \end{equation*}
+  where $X = (\id\otimes T)(\ket{\Omega}\bra{\Omega})\geq 0$. As $X\geq 0$, we can write it as $\sum_i \ket{\Psi_i}\bra{\Psi_i}$ for some (unnormalized) vectors $\ket{\Psi_i}\in \mathcal{H}\otimes\mathcal{K}$. But $\ket{\Psi_i}$ then in turn can be written as $(\id \otimes A_i)\ket{\Omega}$, and thus $X$ can be written as 
+  \begin{equation*}
+    X = \sum_i (\id \otimes A_i) \ket{\Omega}\bra{\Omega} (\id \otimes A_i^\dagger). 
+  \end{equation*} 
+  Therefore 
+  \begin{equation*}
+    T(\rho) = (\tr\otimes \id) ((\rho^T \otimes \id) X) = \sum_i (\tr \otimes\id) ((\rho^T \otimes A_i) \ket{\Omega}\bra{\Omega} (\id\otimes A_i^\dagger)).
+  \end{equation*}
+  Using now \cref{prop:max_ent_pull_through} in the form  $(\rho^T \otimes \id)\ket{\Omega} = (\id\otimes \rho) \ket{\Omega}$, and \cref{prop:max_ent_partial_tr}, we obtain 
+  \begin{equation*}
+    T(\rho) = \sum_i (\tr \otimes\id) ((\id\otimes A_i \rho) \ket{\Omega}\bra{\Omega} (\id\otimes A_i^\dagger)) = \sum_i A_i \rho A_i^\dagger.
+  \end{equation*}
+  Finally to check \ref{CP_Kraus_thm_4} $\Rightarrow$ \ref{CP_Kraus_thm_1}, let the Kraus operators of $T$ be $A_i$, $n\in\mathbb{N}$ arbitrary, and $\rho\in\bounded{\mathcal{H}}\otimes \bounded{\mathbb{C}^n}$ be positive. Then
+    \begin{equation*}
+      (T\otimes \id_{\bounded{\mathbb{C}^n}})(\rho) = \sum_i (A_i \otimes \id_{\mathbb{C}^n}) \rho (A_i^\dagger \otimes \id_{\mathbb{C}^n} ) \geq 0,
+    \end{equation*}
+    i.e., $T$ is completely positive.  
+\end{proof}
+
+
+\begin{proposition}
+  The transposition map is positive but not completely positive.
+\end{proposition}
+\begin{proof}
+  Exercise.
+\end{proof}
+
+\section{Entanglement}
+
+\begin{definition}[Entanglement of pure states]
+  A pure state $\ket{\Psi}\in \mathcal{H}\otimes\mathcal{K}$ is called entangled if it is not a product.
+\end{definition}
+
+\begin{definition}[Separability and entanglement]
+  A state $\rho \in \bounded{\mathcal{H}} \otimes \bounded{\mathcal{K}}$ is called \emph{separable} if there are density matrices $\mu_i\in \bounded{\mathcal{H}}$, $\nu_i\in\bounded{\mathcal{H}}$, $i=1\dots n$, and a probability distribution $p\in\mathbb{R}^n$ such that
+  \begin{equation*}
+    \rho = \sum_{i=1}^n p_i \cdot \mu_i \otimes \nu_i.    
+  \end{equation*}
+  The state $\rho$ is called \emph{entangled} if it is not separable.
+\end{definition}
+
+\begin{proposition}
+  Let $\mathcal{H}$ and $\mathcal{K}$ be Hilbert spaces, $\rho\in\bounded{\mathcal{H}}\otimes\bounded{\mathcal{K}}$ be a \emph{separable} state.  Let $T$ be a positive but not necessarily CP map. Then $(\id\otimes T)(\rho)\geq 0$.
+\end{proposition}
+\begin{proof}
+  As $\rho$ is separable, there are density matrices $\mu_i\in \bounded{\mathcal{H}}$, $\nu_i\in\bounded{\mathcal{H}}$, $i=1\dots n$, and a probability distribution $p\in\mathbb{R}^n$ such that
+    \begin{equation*}
+      \rho = \sum_{i=1}^n p_i \cdot \mu_i \otimes \nu_i.    
+    \end{equation*}
+    Then 
+    \begin{equation*}
+      (\id\otimes T)(\rho) = \sum_{i=1}^n p_i \cdot \mu_i \otimes T(\nu_i) \geq 0,    
+    \end{equation*}
+    as $p_i$, $\mu_i$ and $T(\nu_i)$ are all positive.
+\end{proof}
+
+This can be used to detect entanglement: if $T$ is a positive but not necessarily CP map, and $\rho$ is a density matrix in a bipartite space, then if $(\id\otimes T)(\rho)\ngeq 0$, then we can conclude, apart from the fact that $T$ is not CP, that $\rho$ is entangled. A standard example is the transposition map.
 
 \section{Teleportation and dense coding}
 
