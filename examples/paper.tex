@@ -78,7 +78,46 @@
 \section{Introduction}
 
 \subsection{Bra-ket notation}
+Let $V$ be an $d$-dimensional vector space. For any vector $v\in V$ we will (usually) write $\ket{v}$ instead of $v$, and read \emph{ket}-$v$. When we are doing calculations, we have to fix a basis $v_0, v_1 , \dots, v_{d-1}$, or in ket notation, $\ket{v_0}, \dots , \ket{v_{d-1}}$. This specific basis is then referred to as the \emph{computational basis}.  As we refer to these vectors a lot of time, we simply write $\ket{0}, \dots, \ket{d-1}$ instead of $\ket{v_0}, \dots , \ket{v_{d-1}}$.  That is, we can write every vector $\ket{v}\in V$ as
+\begin{equation}\label{eq:vector_decomp}
+  \ket{v} = v_0 \ket{0} + v_1 \ket{1} +\dots v_{d-1} \ket{d-1},
+\end{equation} 
+with $v_0, \dots, v_{d-1}\in \mathbb{C}$ numbers that are uniquely determined by $\ket{v}$ and our choice of the basis. As usual, we can write this equation in matrix notation; we will think of vectors as column vectors. The computational basis in this notation is given by
+\begin{equation*}
+  \ket{0} = \begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}, \quad 
+  \ket{1} = \begin{pmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{pmatrix}, \quad \text{...,} \quad
+  \ket{d-1} = \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{pmatrix},
+\end{equation*}
+and \cref{eq:vector_decomp} becomes 
+\begin{equation*}
+    \ket{v} = v_0 \ket{0} + v_1 \ket{1} +\dots v_{d-1} \ket{d-1} = v_0 \ \begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}+ v_1\ 
+      \begin{pmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{pmatrix} + \dots + v_{d-1}\ \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{pmatrix} =  \begin{pmatrix} v_0 \\ v_1 \\ \vdots \\ v_{d-1} \end{pmatrix}.
+\end{equation*}
+Given two different vector spaces $V$ and $W$, of dimension $n$ and $m$, respectively, both of their computational basis is denoted the same way: $\ket{0}, \ldots, \ket{n-1}$, and $\ket{0},\ldots, \ket{m-1}$. Notice that $\ket{0}$ denotes two different vectors in two different vector spaces: once $\ket{0}\in V$, and once $\ket{0}\in W$. It usually is clear from the context which vector we are referring to; if confusion arises, we can specify the vector space by attaching an extra subscript to the ket notation; for example, we could write $\ket{0}_V \in V$ and $\ket{0}_W\in W$.
 
+Linear operators act from the left: $A: V\to W$ acts as $\ket{v}\mapsto A\ket{v} \equiv \ket{Av}$. Due to linearity $A$ is uniquely determined by its action on the basis vectors. We write $A\ket{i}_V = \sum_{j} A_{ji} \ket{j}_W$; as usual, we can think of $A$ as a matrix, where the $k^{th}$ column is the vector $A\ket{k-1}$:
+\begin{equation*}
+  A = \begin{pmatrix} A\ket{0} & A\ket{1} & \cdots & A\ket{n-1} \end{pmatrix} = 
+  \begin{pmatrix}
+    A_{00} & A_{01} & \cdots & A_{0, {n-1}} \\
+    A_{10} & A_{11} & \cdots & A_{1, {n-1}} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    A_{m-1,0} & A_{m-1,1} & \cdots & A_{m-1, {n-1}} \\    
+  \end{pmatrix}
+\end{equation*}
+Then the action of $A$ on the vector $v$ is described by the usual matrix-vector multiplication: $A\ket{v} = \sum_{i} A v_i \ket{i} = \sum_{ji} A_{ji} v_i \cdot \ket{j}$, i.e., 
+\begin{equation*}
+  A \ket{v} = 
+  \begin{pmatrix}
+    A_{00} & A_{01} & \cdots & A_{0, {n-1}} \\
+    A_{10} & A_{11} & \cdots & A_{1, {n-1}} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    A_{m-1,0} & A_{m-1,1} & \cdots & A_{m-1, {n-1}} \\    
+  \end{pmatrix} \cdot \begin{pmatrix} v_0 \\ v_1 \\ \vdots \\ v_{n-1} \end{pmatrix} = 
+  \begin{pmatrix} \sum_i A_{0i} v_i \\ \sum_i A_{1i}v_i \\ \vdots \\ \sum_i A_{m-1,i}v_{i} \end{pmatrix}.
+\end{equation*}
+ {\color{red} LINEAR FUNCTIONALS; decomposing a matrix into ...
+}
 \begin{itemize}
   \item Bra and ket
   \item Scalar product
