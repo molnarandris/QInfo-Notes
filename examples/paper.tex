@@ -78,7 +78,9 @@
 \section{Introduction}
 
 \subsection{Bra-ket notation}
-Let $V$ be an $d$-dimensional vector space. For any vector $v\in V$ we will (usually) write $\ket{v}$ instead of $v$, and read \emph{ket}-$v$. When we are doing calculations, we have to fix a basis $v_0, v_1 , \dots, v_{d-1}$, or in ket notation, $\ket{v_0}, \dots , \ket{v_{d-1}}$. This specific basis is then referred to as the \emph{computational basis}.  As we refer to these vectors a lot of time, we simply write $\ket{0}, \dots, \ket{d-1}$ instead of $\ket{v_0}, \dots , \ket{v_{d-1}}$.  That is, we can write every vector $\ket{v}\in V$ as
+
+\subsubsection{Vectors (``kets'')}
+Let $V$ be an $d$-dimensional vector space. For any vector $v\in V$ we will (usually) write $\ket{v}$ instead of $v$, and read \emph{ket}-$v$. When one performs calculations, they have to fix a basis $v_0, v_1 , \dots, v_{d-1}$, or in ket notation, $\ket{v_0}, \dots , \ket{v_{d-1}}$. This specific basis is then referred to as the \emph{computational basis}.  Since these vectors are used a lot, we shorten the notation and simply write $\ket{0}, \dots, \ket{d-1}$ instead of $\ket{v_0}, \dots , \ket{v_{d-1}}$.  That is, we can write every vector $\ket{v}\in V$ as
 \begin{equation}\label{eq:vector_decomp}
   \ket{v} = v_0 \ket{0} + v_1 \ket{1} +\dots v_{d-1} \ket{d-1},
 \end{equation} 
@@ -93,7 +95,74 @@ and \cref{eq:vector_decomp} becomes
     \ket{v} = v_0 \ket{0} + v_1 \ket{1} +\dots v_{d-1} \ket{d-1} = v_0 \ \begin{pmatrix} 1 \\ 0 \\ \vdots \\ 0 \end{pmatrix}+ v_1\ 
       \begin{pmatrix} 0 \\ 1 \\ \vdots \\ 0 \end{pmatrix} + \dots + v_{d-1}\ \begin{pmatrix} 0 \\ 0 \\ \vdots \\ 1 \end{pmatrix} =  \begin{pmatrix} v_0 \\ v_1 \\ \vdots \\ v_{d-1} \end{pmatrix}.
 \end{equation*}
-Given two different vector spaces $V$ and $W$, of dimension $n$ and $m$, respectively, both of their computational basis is denoted the same way: $\ket{0}, \ldots, \ket{n-1}$, and $\ket{0},\ldots, \ket{m-1}$. Notice that $\ket{0}$ denotes two different vectors in two different vector spaces: once $\ket{0}\in V$, and once $\ket{0}\in W$. It usually is clear from the context which vector we are referring to; if confusion arises, we can specify the vector space by attaching an extra subscript to the ket notation; for example, we could write $\ket{0}_V \in V$ and $\ket{0}_W\in W$.
+Given two different vector spaces $V$ and $W$, of dimension $n$ and $m$, respectively, both of their computational bases are denoted the same way: $\ket{0}, \ldots, \ket{n-1}$, and $\ket{0},\ldots, \ket{m-1}$. Notice that $\ket{0}$ denotes two different vectors in two different vector spaces: once $\ket{0}\in V$, and once $\ket{0}\in W$. It usually is clear from the context which vector we are referring to; if confusion arises, we can specify the vector space by attaching an extra subscript to the ket notation; for example, we could write $\ket{0}_V \in V$ and $\ket{0}_W\in W$.
+
+Similarly, at certain calculations we do not even specify the vector space $V$. Instead we give only the (basis) vectors $\ket{0}, \dots , \ket{d-1}$. In these cases one can assume that the highest index appearing is one less than the dimension of $V$, that is, if the highest index is $\ket{d-1}$, then $V\simeq \mathbb{C}^d$.
+
+\begin{example}
+  Let us consider $\mathbb{C}^2$. The computational basis is given by
+  \begin{equation*}
+    \ket{0} = \begin{pmatrix} 1 \\ 0 \end{pmatrix}, \quad 
+    \ket{1} = \begin{pmatrix} 0 \\ 1 \end{pmatrix},
+  \end{equation*}
+   and any vector $\ket{v}\in\mathbb{C}^2$ can be written as
+   \begin{equation*}
+     \ket{v} = \alpha \ket{0} + \beta \ket{1} = \alpha \begin{pmatrix} 1 \\ 0 \end{pmatrix} + \beta \begin{pmatrix} 0 \\ 1 \end{pmatrix} = \begin{pmatrix} \alpha \\ \beta \end{pmatrix},
+   \end{equation*}
+   for two numbers $\alpha,\beta\in\mathbb{C}$.
+\end{example}
+
+\subsubsection{Linear functionals (``bras'')}
+
+{\color{red} MAYBE BETTER NOT HAVING THIS? IT OVERLOADS THE BRAKET.
+On the other hand, $\mathcal{B}(\mathcal{H}) \simeq V\otimes V^*$ is a nice example.}
+
+We denote the set of $V\to \mathbb{C}$ linear functionals as $V^*$. For any linear functional $f\in V^*$ we write $\bra{f}$ instead of $f$, and read \emph{bra}-$f$. In the bra-ket notation the action of $f\in V^*$ on the vector $v\in V$, $f(v)$, is denoted by joining bra-$f$ with ket-$v$: $\scalprod{f}{v} = f(v)$. Recall that if $V$ is $d$-dimensional, then so is $V^*$, and if we fix a basis $v_0, \dots, v_{d-1}$ on $V$, then there is a basis $f_0, \dots, f_{d-1}$ of $V^*$, called the \emph{dual basis}, such that $f_i(v_j) = \delta_{ij}$. Here, and in the rest of the notes, $\delta$ denotes the Kroenecker delta, 
+\begin{equation*}
+   \delta_{ij} = \begin{cases}
+      1 & \text{if } $i=j$,\\
+      0 & \text{else.}
+   \end{cases}
+\end{equation*}
+The vectors in this basis, dual to the computational basis, are denoted by $\bra{0}, \bra{1}, \dots, \bra{d-1}$ instead of $\bra{f_0}, \dots, \bra{f_{d-1}}$. Using this basis, any linear functional $\bra{f}\in V^*$ can be written as 
+\begin{equation}\label{eq:lin_fcn_decomp}
+  \bra{f} = f_0 \bra{0} + f_1 \bra{1} + \dots + f_{d-1} \bra{d-1},
+\end{equation}
+with $f_0,\dots,f_{d-1}\in \mathbb{C}$ numbers that are uniquely determined by $\bra{f}$ and our choice of the basis. Again, we can write this equation in matrix notation; we will think of linear functionals as row vectors. The dual of the computational basis is given by
+\begin{equation*}
+  \bra{0} = \begin{pmatrix}
+    1 & 0& \dots & 0
+  \end{pmatrix}, \quad \dots, \quad
+  \bra{d-1} = \begin{pmatrix}
+  0 & 0& \dots & 1
+\end{pmatrix},
+\end{equation*}
+and \cref{eq:lin_fcn_decomp} becomes 
+\begin{equation*}
+   \bra{f} = f_0 \begin{pmatrix}
+     1 & 0& \dots & 0
+   \end{pmatrix} + \dots + 
+    f_{d-1} \begin{pmatrix}
+      0 & 0& \dots & 1
+    \end{pmatrix} = 
+    \begin{pmatrix}
+     f_0 & f_1& \dots & f_{d-1}
+   \end{pmatrix} .
+\end{equation*}
+Given a vector $\ket{v}\in V$ and a linear functional $\bra{f}\in V^*$, we can write
+\begin{equation*}
+  \scalprod{f}{v} = \left(\sum_{i} f_i \bra{i}\right) \left(\sum_j v_j \ket{j}\right) = \sum_{ij} f_i v_j \scalprod{i}{j} = \sum_i f_i v_i.
+\end{equation*}
+This can also be expressed as the following matrix multiplication:
+\begin{equation*}
+  \scalprod{f}{v} = \begin{pmatrix}
+    f_0 & \dots & f_{d-1}
+  \end{pmatrix} \cdot 
+  \begin{pmatrix}
+    v_0 \\ \vdots \\ v_{d-1}
+  \end{pmatrix} = \sum_i f_i v_i.
+\end{equation*}
+\subsubsection{Linear operators (matrices)}
 
 Linear operators act from the left: $A: V\to W$ acts as $\ket{v}\mapsto A\ket{v} \equiv \ket{Av}$. Due to linearity $A$ is uniquely determined by its action on the basis vectors. We write $A\ket{i}_V = \sum_{j} A_{ji} \ket{j}_W$; as usual, we can think of $A$ as a matrix, where the $k^{th}$ column is the vector $A\ket{k-1}$:
 \begin{equation*}
@@ -116,14 +185,12 @@ Then the action of $A$ on the vector $v$ is described by the usual matrix-vector
   \end{pmatrix} \cdot \begin{pmatrix} v_0 \\ v_1 \\ \vdots \\ v_{n-1} \end{pmatrix} = 
   \begin{pmatrix} \sum_i A_{0i} v_i \\ \sum_i A_{1i}v_i \\ \vdots \\ \sum_i A_{m-1,i}v_{i} \end{pmatrix}.
 \end{equation*}
- {\color{red} LINEAR FUNCTIONALS; decomposing a matrix into ...
-}
-\begin{itemize}
-  \item Bra and ket
-  \item Scalar product
-  \item Adjoint
-  \item Eigenvalues
-\end{itemize}
+
+\subsubsection{Scalar product}
+
+\subsubsection{Adjoint}
+
+\subsubsection{Eigenvalues}
 
 \subsection{Positivity}
 
